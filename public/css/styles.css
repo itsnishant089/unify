@@ -731,8 +731,9 @@ button, a {
 }
 
 .featured-card {
-  min-width: 78%;
-  max-width: 78%;
+  min-width: 80%;
+  max-width: 80%;
+  flex-shrink: 0;
   scroll-snap-align: start;
 }
 
