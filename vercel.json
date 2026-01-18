@@ -1,5 +1,7 @@
 {
-  "routes": [
-    { "src": "/", "dest": "/index.html" }
+  "buildCommand": null,
+  "outputDirectory": "public",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
