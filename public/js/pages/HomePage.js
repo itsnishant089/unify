@@ -177,11 +177,42 @@ export function renderHomePage(container) {
         })
 
         /* ---------- EVENTS ---------- */
-        container.querySelector('#search-input')
-            ?.addEventListener('input', e => {
+        const searchInput = container.querySelector('#search-input')
+        if (searchInput) {
+            let renderTimeout = null
+            
+            searchInput.addEventListener('input', e => {
                 searchQuery = e.target.value
-                render()
+                const cursorPos = e.target.selectionStart
+                
+                // Debounce render to avoid issues with rapid typing
+                clearTimeout(renderTimeout)
+                renderTimeout = setTimeout(() => {
+                    render()
+                    
+                    // Restore cursor position after render
+                    setTimeout(() => {
+                        const newInput = container.querySelector('#search-input')
+                        if (newInput && newInput.value === searchQuery) {
+                            const pos = Math.min(cursorPos, searchQuery.length)
+                            newInput.focus()
+                            newInput.setSelectionRange(pos, pos)
+                        }
+                    }, 10)
+                }, 150)
             })
+            
+            // Prevent Enter key from submitting/form behavior
+            searchInput.addEventListener('keydown', e => {
+                if (e.key === 'Enter') {
+                    e.preventDefault()
+                    searchInput.blur() // Close keyboard on mobile
+                    // Trigger final render
+                    clearTimeout(renderTimeout)
+                    render()
+                }
+            })
+        }
 
         container.querySelector('#filter-toggle-btn')
             ?.addEventListener('click', () => {
