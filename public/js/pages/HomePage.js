@@ -81,12 +81,15 @@ export function renderHomePage(container) {
                             </div>
                             <input
                                 id="search-input"
-                                type="text"
+                                type="search"
+                                inputmode="search"
+                                autocomplete="off"
                                 value="${searchQuery}"
                                 placeholder="Search events"
                                 class="w-full pl-10 pr-4 py-3 rounded-xl
                                        bg-surface border border-border text-sm
-                                       focus:outline-none focus:ring-2 focus:ring-primary/20"
+                                       text-text-primary placeholder-text-muted
+                                       focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
                             />
                         </div>
 
