@@ -399,13 +399,27 @@ button, a {
 ========================= */
 
 .decide-card {
-  height: 100%;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  height: calc(100% - 24px);
   background: #fff;
   border-radius: 28px;
   overflow: hidden;
   box-shadow: 0 30px 80px rgba(15,23,42,0.18);
   display: flex;
   flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .decide-card {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+  }
 }
 
 /* HERO IMAGE */
@@ -537,6 +551,7 @@ button, a {
 }
 
 .register-card {
+  position: relative;
   width: 90%;
   max-width: 420px;
   background: white;
@@ -552,6 +567,13 @@ button, a {
   position: relative;
   height: calc(100vh - 56px - 72px); /* top bar + bottom nav */
   overflow: hidden;
+  padding: 12px;
+}
+
+@media (min-width: 768px) {
+  .decide-root {
+    padding: 0;
+  }
 }
 
 /* Swipe intent overlay */
@@ -597,6 +619,23 @@ button, a {
   color: #f59e0b;
   background: rgba(245,158,11,0.18);
   border: 2px solid rgba(245,158,11,0.4);
+}
+
+.swipe-intent.down span {
+  color: #8b5cf6;
+  background: rgba(139,92,246,0.18);
+  border: 2px solid rgba(139,92,246,0.4);
+}
+
+.swipe-down {
+  animation: swipeDown 0.35s ease-out forwards;
+}
+
+@keyframes swipeDown {
+  to {
+    transform: translateY(130%);
+    opacity: 0;
+  }
 }
 /* =========================
    SCHEDULE HEATMAP – CLEAN & MODERN

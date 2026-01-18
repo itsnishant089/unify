@@ -90,12 +90,16 @@ export function showEventModal(event, onAction, onClose) {
             ${!event.isRegistered ? `
                 <div class="pt-4 border-t border-border flex gap-3">
                     <button id="modal-save-btn"
-                        class="flex-1 py-3 rounded-xl bg-surface border font-semibold">
-                        ${icons.Bookmark()} Save
+                        class="flex-1 py-3 px-4 rounded-xl bg-surface border border-border 
+                               text-text-primary font-semibold flex items-center justify-center gap-2">
+                        ${icons.Bookmark()}
+                        <span>Save</span>
                     </button>
                     <button id="modal-register-btn"
-                        class="flex-1 py-3 rounded-xl bg-primary text-white font-semibold">
-                        ${icons.CheckCircle2()} Register
+                        class="flex-1 py-3 px-4 rounded-xl bg-primary text-white font-semibold 
+                               flex items-center justify-center gap-2 shadow-lg shadow-primary/30">
+                        ${icons.CheckCircle2()}
+                        <span>Register</span>
                     </button>
                 </div>
             ` : `
