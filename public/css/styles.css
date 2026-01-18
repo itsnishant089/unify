@@ -592,6 +592,12 @@ button, a {
   background: rgba(37,99,235,0.18);
   border: 2px solid rgba(37,99,235,0.4);
 }
+
+.swipe-intent.up span {
+  color: #f59e0b;
+  background: rgba(245,158,11,0.18);
+  border: 2px solid rgba(245,158,11,0.4);
+}
 /* =========================
    SCHEDULE HEATMAP – CLEAN & MODERN
 ========================= */

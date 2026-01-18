@@ -80,12 +80,31 @@ export function renderDecidePage(container) {
         if (!event) return
 
         haptic(12)
+        const card = container.querySelector('#swipe-card')
 
         if (dir === 'right') {
-            openRegisterModal(event)
-        } else {
-            index++
-            render()
+            // Swipe RIGHT → Register
+            card.classList.add('swipe-right')
+            setTimeout(() => {
+                openRegisterModal(event)
+            }, 200)
+        } else if (dir === 'left') {
+            // Swipe LEFT → Save
+            card.classList.add('swipe-left')
+            // Mark event as saved
+            event.isSaved = true
+            console.log('Event saved:', event.id)
+            setTimeout(() => {
+                index++
+                render()
+            }, 350)
+        } else if (dir === 'up') {
+            // Swipe UP → Skip
+            card.classList.add('swipe-up')
+            setTimeout(() => {
+                index++
+                render()
+            }, 350)
         }
     }
 
@@ -104,16 +123,28 @@ export function renderDecidePage(container) {
         const dx = e.touches[0].clientX - startX
         const dy = e.touches[0].clientY - startY
 
-        card.style.transform =
-            `translate(${dx}px, ${dy}px) rotate(${dx * 0.06}deg)`
+        // Determine primary swipe direction (horizontal vs vertical)
+        const absDx = Math.abs(dx)
+        const absDy = Math.abs(dy)
 
-        if (dx > 50) {
+        if (absDy > absDx && dy < -50) {
+            // Swiping UP
+            card.style.transform = `translate(${dx}px, ${dy}px)`
+            intent.className = 'swipe-intent visible up'
+            intent.innerHTML = `<span>SKIP</span>`
+        } else if (dx > 50) {
+            // Swiping RIGHT
+            card.style.transform = `translate(${dx}px, ${dy}px) rotate(${dx * 0.06}deg)`
             intent.className = 'swipe-intent visible right'
             intent.innerHTML = `<span>REGISTER</span>`
         } else if (dx < -50) {
+            // Swiping LEFT
+            card.style.transform = `translate(${dx}px, ${dy}px) rotate(${dx * 0.06}deg)`
             intent.className = 'swipe-intent visible left'
             intent.innerHTML = `<span>SAVE</span>`
         } else {
+            // Default position
+            card.style.transform = `translate(${dx}px, ${dy}px) rotate(${dx * 0.03}deg)`
             intent.className = 'swipe-intent'
             intent.innerHTML = ''
         }
@@ -123,12 +154,32 @@ export function renderDecidePage(container) {
         if (!dragging) return
         dragging = false
 
+        const card = container.querySelector('#swipe-card')
+        const intent = container.querySelector('#swipe-intent')
+
         const dx = e.changedTouches[0].clientX - startX
+        const dy = e.changedTouches[0].clientY - startY
         const threshold = 90
 
-        if (dx > threshold) handleSwipe('right')
-        else if (dx < -threshold) handleSwipe('left')
-        else render()
+        const absDx = Math.abs(dx)
+        const absDy = Math.abs(dy)
+
+        // Check vertical swipe first (UP), then horizontal
+        if (absDy > absDx && dy < -threshold) {
+            // Swipe UP → Skip
+            handleSwipe('up')
+        } else if (dx > threshold) {
+            // Swipe RIGHT → Register
+            handleSwipe('right')
+        } else if (dx < -threshold) {
+            // Swipe LEFT → Save
+            handleSwipe('left')
+        } else {
+            // Reset card position
+            card.style.transform = ''
+            intent.className = 'swipe-intent'
+            intent.innerHTML = ''
+        }
     }
 
     /* =========================
