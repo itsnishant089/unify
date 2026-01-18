@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- BASIC META -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unify – Student Event Experience</title>
+
+    <!-- BRANDING -->
+    <link rel="icon" type="image/svg+xml" href="/public/logo.svg" />
+    <meta name="theme-color" content="#2563EB" />
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    />
+
+    <!-- TAILWIND CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bg-primary': '#f8fafc',
+                        'bg-secondary': '#ffffff',
+                        'surface': '#f1f5f9',
+                        'text-primary': '#0b1220',
+                        'text-secondary': '#334155',
+                        'text-muted': '#64748b',
+                        'border': '#e5eaf1',
+                        'primary': '#2563eb',
+                        'primary-hover': '#1d4ed8',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- GLOBAL STYLES (COMPILED / CUSTOM CSS ONLY) -->
+    <link rel="stylesheet" href="/public/css/styles.css" />
+</head>
+
+<body class="bg-bg-primary text-text-primary font-sans antialiased">
+    <!-- APP ROOT -->
+    <div id="app" class="min-h-screen pb-20 safe-area-inset-bottom"></div>
+
+    <!-- MAIN ENTRY -->
+    <script type="module" src="/public/js/app.js"></script>
+</body>
+</html>
